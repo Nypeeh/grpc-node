@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+service TodoService {
+  rpc List (Empty) returns (TodoList) {}
+  rpc Insert (NewItem) returns (TodoItem) {}
+  rpc Mark (TodoMarkData) returns (TodoItem) {}
+  rpc Remove (TodoItemId) returns (Empty) {}
+}
+
+message Empty {}
+
+message TodoMarkData {
+  int32 id = 1;
+  bool checked = 2;
+}
+
+message TodoItemId {
+  int32 id = 1;
+}
+
+message NewItem {
+  string task = 1;
+}
+
+message TodoItem {
+  int32 id = 1;
+  bool done = 2;
+  string task = 3;
+}
+
+message TodoList {
+  repeated TodoItem todoItem = 1;
+}
